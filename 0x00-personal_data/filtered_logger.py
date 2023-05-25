@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """ Obfuscates user's personal data """
 from typing import List
+import mysql.connector
 import logging
 import re
+import os
 
 PII_FIELDS = ('email', 'phone', 'ssn', 'password', 'ip')
 
@@ -28,6 +30,26 @@ def get_logger() -> logging.Logger:
     return logger
 
 
+def get_db():
+    """ Returns a connector to a given database """
+    PERSONAL_DATA_DB_USERNAME = os.getenv('PERSONAL_DATA_DB_USERNAME', 'root')
+    PERSONAL_DATA_DB_PASSWORD = os.getenv('PERSONAL_DATA_DB_PASSWORD', '')
+    PERSONAL_DATA_DB_HOST = os.getenv('PERSONAL_DATA_DB_HOST', 'localhost')
+    PERSONAL_DATA_DB_NAME = os.getenv('PERSONAL_DATA_DB_NAME')
+
+    try:
+        connection = mysql.connector.connection.MySQLConnection(
+            host=PERSONAL_DATA_DB_HOST,
+            user=PERSONAL_DATA_DB_USERNAME,
+            password=PERSONAL_DATA_DB_PASSWORD,
+            database=PERSONAL_DATA_DB_NAME
+
+        )
+        return connection
+    except mysql.connector.Error as err:
+        pass
+
+
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
         """
@@ -41,6 +63,7 @@ class RedactingFormatter(logging.Formatter):
         self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
+        """ Return a formatter """
         filtered_record = filter_datum(
             self.fields, self.REDACTION, record.getMessage(), self.SEPARATOR)
         record.msg = filtered_record
