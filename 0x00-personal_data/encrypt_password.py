@@ -11,3 +11,13 @@ def hash_password(password: str) -> bytes:
     """
     encoded_password = password.encode()
     return bcrypt.hashpw(encoded_password, bcrypt.gensalt())
+
+
+def is_valid(hashed_password: bytes, password: str) -> bool:
+    """ Validate that the password matches the hashed
+    password
+    """
+    encoded_password = password.encode()
+    if bcrypt.checkpw(encoded_password, hash_password):
+        return True
+    return False
