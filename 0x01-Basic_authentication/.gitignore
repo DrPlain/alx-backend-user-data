@@ -1,1 +1,4 @@
 *.zip
+lib/
+bin/
+pyvenv.cfg
