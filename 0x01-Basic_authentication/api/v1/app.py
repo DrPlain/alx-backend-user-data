@@ -24,6 +24,9 @@ else:
 
 @app.before_request
 def before_request():
+    """ Executes specific instructions before action is carried on request
+    """
+
     if auth:
         action_list = ['/api/v1/status/',
                        '/api/v1/unauthorized/', '/api/v1/forbidden/']
