@@ -126,6 +126,8 @@ def update_user(user_id: str = None) -> str:
 
 @app_views.route('/users/me')
 def get_auth_user():
+    """ Gets authenticated user
+    """
     current_user = request.current_user
     if current_user:
         return jsonify(current_user.to_json())
