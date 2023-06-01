@@ -8,6 +8,10 @@ import os
 
 @auth_views('/auth_session/login', strict_slashes=False, methods=['GET', 'POST'])
 def login():
+    """ Login view
+    Returns:
+        An authentication User object with an active session
+    """
     email = request.form.get('email')
     password = request.form.get('password')
     if email is None:
