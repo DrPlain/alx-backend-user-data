@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """ Handles all routes for the Session authentication
 """
-from api.v1.views import auth_views
+from api.v1.views import app_views
 from flask import request, jsonify
 from models.user import User
 import os
 
 
-@auth_views('/auth_session/login', strict_slashes=False, methods=['POST'])
+@app_views('/auth_session/login', strict_slashes=False, methods=['POST'])
 def login():
     """ Login view
     Returns:
