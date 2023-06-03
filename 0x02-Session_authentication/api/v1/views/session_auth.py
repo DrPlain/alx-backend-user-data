@@ -7,7 +7,7 @@ from models.user import User
 import os
 
 
-@app_views('/auth_session/login', strict_slashes=False, methods=['POST'])
+@app_views.route('/auth_session/login', strict_slashes=False, methods=['POST'])
 def login():
     """ Login view
     Returns:
