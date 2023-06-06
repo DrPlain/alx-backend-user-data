@@ -44,6 +44,7 @@ class DB:
 
     def find_user_by(self, **kwargs) -> User:
         """ Find a user by a key-value pair
+        Return: The first row of the search result
         """
         if not kwargs:
             raise InvalidRequestError
