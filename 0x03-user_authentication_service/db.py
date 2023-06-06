@@ -62,3 +62,15 @@ class DB:
             raise NoResultFound
 
         return user
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """ A method to update user in database
+        """
+        columns = User.__table__.columns.keys()
+        for key in kwargs.keys():
+            if key not in columns:
+                raise ValueError
+        user = self._session.query(User).filter_by(id=user_id).first()
+        if user:
+            for k, v in kwargs.items():
+                setattr(user, k, v)
