@@ -10,6 +10,7 @@ from typing import TypeVar
 from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.orm.exc import NoResultFound
 from user import Base, User
+import bcrypt
 
 
 class DB:
