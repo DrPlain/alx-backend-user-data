@@ -4,6 +4,7 @@
 import bcrypt
 from db import DB
 from user import User
+from uuid import uuid4
 
 
 def _hash_password(password: str) -> bytes:
@@ -49,3 +50,8 @@ class Auth:
             return False
         if user:
             return bcrypt.checkpw(password.encode(), user.hashed_password)
+
+    def _generate_uuid(self) -> str:
+        """ Generates and returns a new UUID
+        """
+        return str(uuid4())
