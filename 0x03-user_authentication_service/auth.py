@@ -69,3 +69,16 @@ class Auth:
             session_id = str(uuid4())
             user.session_id = session_id
             return session_id
+
+    def get_user_from_session_id(self, session_id: str) -> User:
+        """ Find user by session_id
+        """
+        if not session_id:
+            return None
+
+        user = None
+        try:
+            user = self._db.find_user_by(session_id=session_id)
+        except Exception:
+            return None
+        return user
