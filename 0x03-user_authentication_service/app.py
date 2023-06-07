@@ -73,6 +73,8 @@ def logout():
                 return redirect("/")
             else:
                 abort(403)
+        else:
+            abort(403)
 
 
 if __name__ == "__main__":
