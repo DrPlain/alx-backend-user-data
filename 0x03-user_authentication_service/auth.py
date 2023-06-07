@@ -84,7 +84,7 @@ class Auth:
         return user
 
     def destroy_session(self, user_id: int):
-        """ Destroys session
+        """ Destroys session of a given user
         """
         user = None
         try:
