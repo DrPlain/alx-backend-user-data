@@ -24,6 +24,7 @@ def users():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
+        print(email, password)
         user = None
         try:
             user = AUTH.register_user(email, password)
